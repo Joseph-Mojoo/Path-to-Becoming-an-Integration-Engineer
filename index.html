@@ -118,7 +118,7 @@
             color: #ffffff;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
             margin-top: 0;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             text-align: center;
         }
 
@@ -295,17 +295,98 @@
             }
         }
 
-        .slide-content {
+        .slide-content-wrapper {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
+            position: relative;
+            overflow: hidden;
         }
 
-        #content {
-            flex: 1;
-            overflow-y: auto;
-            padding-right: 10px;
+        .slide-content {
+            height: 100%;
+            overflow-y: scroll;
+            padding-right: 20px; /* Space for custom scrollbar */
+            margin-right: -20px; /* Hide default scrollbar */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+
+        .slide-content::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
+        }
+
+        .custom-scrollbar {
+            position: absolute;
+            right: 2px;
+            top: 2px;
+            bottom: 2px;
+            width: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .custom-scrollbar.visible {
+            opacity: 1;
+        }
+
+        .scrollbar-thumb {
+            position: absolute;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .two-column-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 1023px) {
+            .two-column-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 1.3em;
+            line-height: 1.5;
+        }
+
+        .icon {
+            margin-right: 20px;
+            font-size: 1.2em;
+            min-width: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .intro-slide .subtitle,
+        .last-slide .subtitle {
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 30px;
         }
 
         @media (max-width: 768px) {
@@ -329,6 +410,11 @@
 
             .icon {
                 font-size: 1em;
+            }
+
+            li {
+                width: 100%;
+                padding-right: 0;
             }
         }
 
@@ -432,33 +518,6 @@
             left: 100%;
         }
 
-        .subtitle {
-            font-size: 1.2em;
-            color: rgba(255, 255, 255, 0.8);
-            text-align: center;
-            margin-top: 5px;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .intro-slide .subtitle,
-        .last-slide .subtitle {
-            font-size: 1.5em;
-            margin-top: 20px;
-            margin-bottom: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .subtitle {
-                font-size: 1em;
-            }
-
-            .intro-slide .subtitle,
-            .last-slide .subtitle {
-                font-size: 1.2em;
-            }
-        }
-
         @media (max-width: 1200px) {
             .slide {
                 padding: 25px 25px 20px;
@@ -504,6 +563,11 @@
             .icon {
                 font-size: 1em;
             }
+
+            li {
+                width: 100%;
+                padding-right: 0;
+            }
         }
     </style>
 </head>
@@ -514,9 +578,14 @@
             <div class="logo-container">
                 <img src="sparc_logo.png" alt="SPARC Logo" class="card-logo">
             </div>
-            <div class="slide-content">
-                <h1>Path to Becoming an Integration Engineer</h1>
-                <div id="content"></div>
+            <div class="slide-content-wrapper">
+                <div class="slide-content">
+                    <h1>Path to Becoming an Integration Engineer</h1>
+                    <div id="content"></div>
+                </div>
+                <div class="custom-scrollbar">
+                    <div class="scrollbar-thumb"></div>
+                </div>
             </div>
             <div class="nav-buttons">
                 <button id="prevBtn"><i class="fas fa-chevron-left"></i> Previous</button>
@@ -706,19 +775,15 @@
                 fireworks.start();
             } else {
                 content.innerHTML = `
-                    <div class="slide-content">
-                        <h2>${slide.title}</h2>
-                        ${slide.subtitle ? `<p class="subtitle">${formatSubtitle(slide.subtitle)}</p>` : ''}
-                        <div id="content">
-                            <ul>
-                                ${slide.content.map(item => `
-                                    <li>
-                                        <i class="${item.icon} icon"></i>
-                                        <span>${item.text}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
+                    <h2>${slide.title}</h2>
+                    ${slide.subtitle ? `<p class="subtitle">${formatSubtitle(slide.subtitle)}</p>` : ''}
+                    <div class="two-column-content">
+                        ${slide.content.map(item => `
+                            <div class="content-item">
+                                <i class="${item.icon} icon"></i>
+                                <span>${item.text}</span>
+                            </div>
+                        `).join('')}
                     </div>
                 `;
                 if (mainTitle) mainTitle.style.display = 'block';
@@ -729,6 +794,15 @@
             if (slideIndicator) slideIndicator.textContent = `Slide ${currentSlideIndex + 1} of ${totalSlides}`;
             if (prevBtn) prevBtn.disabled = currentSlideIndex === 0;
             if (nextBtn) nextBtn.disabled = currentSlideIndex === totalSlides - 1;
+
+            // Reset scroll position
+            const slideContent = document.querySelector('.slide-content');
+            if (slideContent) {
+                slideContent.scrollTop = 0;
+            }
+
+            // Update scrollbar visibility
+            updateScrollbarVisibility();
         }
 
         function changeSlide(direction) {
@@ -792,6 +866,31 @@
             }, 300);
         }
 
+        function updateScrollbarVisibility() {
+            const content = document.querySelector('.slide-content');
+            const scrollbar = document.querySelector('.custom-scrollbar');
+            const thumb = document.querySelector('.scrollbar-thumb');
+
+            if (content && scrollbar && thumb) {
+                const isScrollable = content.scrollHeight > content.clientHeight;
+                scrollbar.classList.toggle('visible', isScrollable);
+
+                const updateScrollbarThumb = () => {
+                    const scrollPercentage = (content.scrollTop / (content.scrollHeight - content.clientHeight)) * 100;
+                    const thumbHeight = (content.clientHeight / content.scrollHeight) * 100;
+                    thumb.style.height = `${thumbHeight}%`;
+                    thumb.style.top = `${scrollPercentage}%`;
+                };
+
+                if (isScrollable) {
+                    updateScrollbarThumb();
+                    content.addEventListener('scroll', updateScrollbarThumb);
+                } else {
+                    content.removeEventListener('scroll', updateScrollbarThumb);
+                }
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             console.log('DOM fully loaded');
 
@@ -824,6 +923,36 @@
 
             // Initial slide update
             updateSlide();
+
+            // Handle custom scrollbar
+            const content = document.querySelector('.slide-content');
+            const scrollbar = document.querySelector('.custom-scrollbar');
+            const thumb = document.querySelector('.scrollbar-thumb');
+
+            if (content && scrollbar && thumb) {
+                let isDragging = false;
+                let startY;
+                let startScrollTop;
+
+                thumb.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    startY = e.clientY - thumb.offsetTop;
+                    startScrollTop = content.scrollTop;
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    const y = e.clientY - scrollbar.getBoundingClientRect().top;
+                    const percentY = y / scrollbar.clientHeight;
+                    content.scrollTop = percentY * (content.scrollHeight - content.clientHeight);
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                });
+
+                window.addEventListener('resize', updateScrollbarVisibility);
+            }
         });
     </script>
 </body>
