@@ -85,7 +85,7 @@ This presentation is designed to work on modern browsers that support CSS3 and E
 
 ## License
 
-[Add your chosen license here]
+[]
 
 ## Author
 
