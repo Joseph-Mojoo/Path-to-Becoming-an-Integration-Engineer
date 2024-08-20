@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path to Becoming an Integration Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Roboto+Slab:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #2B296A, #3F3D8C, #5451AE, #6A67D0);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        #root {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide {
+            background: linear-gradient(
+                135deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 255, 255, 0.1) 100%
+            );
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            padding: 30px 30px 20px;
+            width: 88%;
+            max-width: 1200px;
+            height: 82vh;
+            max-height: 85vh;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+            opacity: 1;
+        }
+
+        .slide.fade-out {
+            opacity: 0;
+        }
+
+        .slide.fade-in {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.05) 20%,
+                transparent 60%
+            );
+            animation: shimmer 10s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.8em;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.4em;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 1.3em;
+            line-height: 1.5;
+        }
+
+        li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .icon {
+            margin-right: 15px;
+            font-size: 1.2em;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: all 0.4s ease;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        button:hover:before {
+            left: 100%;
+        }
+
+        button:disabled {
+            background: rgba(160, 174, 192, 0.3);
+            cursor: not-allowed;
+            transform: scale(1);
+            box-shadow: none;
+        }
+
+        button:disabled:before {
+            display: none;
+        }
+        .slide-indicator {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .logo-watermark {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 150px;
+            height: auto;
+            opacity: 0.2;
+            z-index: 1000;
+            filter: brightness(0) invert(1);
+        }
+
+        @keyframes moveToCenterAndGrow {
+            0% {
+                left: 20px;
+                bottom: 20px;
+                transform: translate(0, 0) scale(1);
+                opacity: 0.2;
+            }
+            100% {
+                left: 50%;
+                bottom: 50%;
+                transform: translate(-50%, 50%) scale(2);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes moveBackAndShrink {
+            0% {
+                left: 50%;
+                bottom: 50%;
+                transform: translate(-50%, 50%) scale(2);
+                opacity: 0.8;
+            }
+            100% {
+                left: 20px;
+                bottom: 20px;
+                transform: translate(0, 0) scale(1);
+                opacity: 0.2;
+            }
+        }
+
+        .logo-watermark.animate-to-center {
+            animation: moveToCenterAndGrow 0.5s forwards;
+        }
+
+        .logo-watermark.animate-back {
+            animation: moveBackAndShrink 0.5s forwards;
+        }
+
+        @media (max-width: 768px) {
+            .logo-watermark {
+                width: 100px;
+            }
+
+            @keyframes moveToCenterAndGrow {
+                100% {
+                    transform: translate(-50%, 50%) scale(1.5);
+                }
+            }
+
+            @keyframes moveBackAndShrink {
+                0% {
+                    transform: translate(-50%, 50%) scale(1.5);
+                }
+            }
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .card-logo {
+            width: 250px;
+            height: auto;
+            opacity: 0.7;
+            filter: brightness(0) invert(1);
+        }
+
+        @media (max-width: 768px) {
+            .card-logo {
+                width: 200px;
+            }
+        }
+
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+
+        #content {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px 20px 15px;
+                width: 92%;
+                height: 85vh;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            ul {
+                font-size: 1.1em;
+            }
+
+            .icon {
+                font-size: 1em;
+            }
+        }
+
+        button i {
+            transition: transform 0.3s ease;
+        }
+
+        #prevBtn:active i {
+            animation: moveLeft 0.5s ease;
+        }
+
+        #nextBtn:active i {
+            animation: moveRight 0.5s ease;
+        }
+
+        @keyframes moveLeft {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-5px); }
+        }
+
+        @keyframes moveRight {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        .intro-slide, .last-slide {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-logo, .last-slide-logo {
+            width: 400px;
+            height: auto;
+            margin-bottom: 30px;
+        }
+
+        .intro-slide h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .last-slide h2 {
+            font-size: 3.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .presenter {
+            font-size: 1.5em;
+            color: #ffffff;
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .fireworks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .intro-logo, .intro-slide h1, .last-slide-logo, .last-slide h2, .presenter {
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .intro-logo, .last-slide-logo {
+                width: 300px;
+            }
+
+            .intro-slide h1, .last-slide h2 {
+                font-size: 2.8em;
+            }
+        }
+
+        button.simulated-hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        button.simulated-hover:before {
+            left: 100%;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .intro-slide .subtitle,
+        .last-slide .subtitle {
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .intro-slide .subtitle,
+            .last-slide .subtitle {
+                font-size: 1.2em;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .slide {
+                padding: 25px 25px 20px;
+                width: 90%;
+            }
+
+            h2 {
+                font-size: 2.2em;
+            }
+
+            .subtitle {
+                font-size: 1.1em;
+            }
+
+            ul {
+                font-size: 1.2em;
+            }
+
+            .icon {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px 20px 15px;
+                width: 92%;
+                height: 85vh;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            ul {
+                font-size: 1.1em;
+            }
+
+            .icon {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="sparc_logo.png" alt="SPARC Logo" class="logo-watermark">
+    <div id="root">
+        <div class="slide active">
+            <div class="logo-container">
+                <img src="sparc_logo.png" alt="SPARC Logo" class="card-logo">
+            </div>
+            <div class="slide-content">
+                <h1>Path to Becoming an Integration Engineer</h1>
+                <div id="content"></div>
+            </div>
+            <div class="nav-buttons">
+                <button id="prevBtn"><i class="fas fa-chevron-left"></i> Previous</button>
+                <button id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="slide-indicator">
+        Slide <span id="currentSlide">1</span> of 7
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+    <script>
+        const slides = [
+    {
+        isIntroSlide: true,
+        title: "Path to Becoming an Integration Engineer",
+        subtitle: "Connecting Systems, Empowering Solutions"
+    },
+    {
+        title: "What is Integration Engineering?",
+        subtitle: "Understanding the Core of System Connectivity",
+        content: [
+            {icon: "fas fa-user-cog", text: "Definition: Experts who connect diverse software systems"},
+            {icon: "fas fa-network-wired", text: "Critical role in creating seamless digital ecosystems"},
+            {icon: "fas fa-puzzle-piece", text: "Bridge gaps between applications, data, and platforms"}
+        ]
+    },
+    {
+        title: "Essential Skills and Knowledge",
+        subtitle: "The Foundation for Integration Excellence",
+        content: [
+            {icon: "fas fa-code", text: "Programming: Python, Java, JavaScript, etc."},
+            {icon: "fas fa-exchange-alt", text: "API Mastery: REST, GraphQL, SOAP"},
+            {icon: "fas fa-database", text: "Database Proficiency: SQL, NoSQL"},
+            {icon: "fas fa-cloud", text: "Cloud Expertise: AWS, Azure, Google Cloud"},
+            {icon: "fas fa-cogs", text: "System Architecture and Design Patterns"}
+        ]
+    },
+    {
+        title: "Education and Certifications",
+        subtitle: "The Path to Integration Mastery",
+        content: [
+            {icon: "fas fa-graduation-cap", text: "Bachelor's in Computer Science or related field"},
+            {icon: "fas fa-certificate", text: "Key Certifications:"},
+            {icon: "fab fa-aws", text: "AWS Certified Solutions Architect"},
+            {icon: "fab fa-microsoft", text: "Microsoft Azure Solutions Expert"},
+            {icon: "fas fa-cloud-upload-alt", text: "Google Cloud Professional Cloud Architect"}
+        ]
+    },
+    {
+        title: "Building Your Experience",
+        subtitle: "Gaining Real-World Exposure",
+        content: [
+            {icon: "fas fa-briefcase", text: "Internships: Gain real-world integration experience"},
+            {icon: "fas fa-code-branch", text: "Personal Projects: Showcase your integration skills"},
+            {icon: "fas fa-users", text: "Network: Join tech communities and attend conferences"},
+            {icon: "fas fa-book-reader", text: "Continuous Learning: Stay updated with latest trends"}
+        ]
+    },
+    {
+        title: "Career Growth and Opportunities",
+        subtitle: "Exploring the Integration Landscape",
+        content: [
+            {icon: "fas fa-layer-group", text: "Specializations: API Management, ETL, Microservices"},
+            {icon: "fas fa-chart-line", text: "Career Progression:"},
+            {icon: "fas fa-user", text: "Junior Integration Engineer"},
+            {icon: "fas fa-user-tie", text: "Senior Integration Engineer"},
+            {icon: "fas fa-user-astronaut", text: "Integration Architect"},
+            {icon: "fas fa-users-cog", text: "Integration Engineering Manager"}
+        ]
+    },
+    {
+        title: "Embark on Your Integration Journey",
+        subtitle: "The Future Awaits",
+        content: [
+            {icon: "fas fa-rocket", text: "Start your path to becoming an Integration Engineer today!"},
+            {icon: "fas fa-handshake", text: "Connect with mentors and industry professionals"},
+            {icon: "fas fa-lightbulb", text: "Embrace challenges and continuous improvement"}
+        ],
+        isLastSlide: true
+    }
+];
+
+        const totalSlides = slides.length;
+
+        let currentSlideIndex = 0;
+
+        function updateSlide() {
+            console.log('Updating slide. Current index:', currentSlideIndex);
+            if (currentSlideIndex < 0 || currentSlideIndex >= slides.length) {
+                console.error('Invalid slide index:', currentSlideIndex);
+                return;
+            }
+
+            const slide = slides[currentSlideIndex];
+            const content = document.getElementById('content');
+            const mainTitle = document.querySelector('h1');
+            const logoContainer = document.querySelector('.logo-container');
+            const currentSlideElement = document.getElementById('currentSlide');
+            const slideIndicator = document.querySelector('.slide-indicator');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (!content) {
+                console.error('Content element not found');
+                return;
+            }
+
+            const formatSubtitle = (subtitle) => subtitle ? `~ ${subtitle} ~` : '';
+
+            if (slide.isIntroSlide) {
+                content.innerHTML = `
+                    <div class="intro-slide">
+                        <img src="sparc_logo.png" alt="SPARC Logo" class="intro-logo">
+                        <h1>${slide.title}</h1>
+                        <p class="subtitle">${formatSubtitle(slide.subtitle)}</p>
+                        <p class="presenter">Presented by Joseph Mojoo</p>
+                    </div>
+                `;
+                if (mainTitle) mainTitle.style.display = 'none';
+                if (logoContainer) logoContainer.style.display = 'none';
+            } else if (slide.isLastSlide) {
+                content.innerHTML = `
+                    <div class="last-slide">
+                        <img src="sparc_logo.png" alt="SPARC Logo" class="last-slide-logo">
+                        <h2>${slide.title}</h2>
+                        <p class="subtitle">${formatSubtitle(slide.subtitle)}</p>
+                        <p class="presenter">Presented by Joseph Mojoo</p>
+                        <div class="fireworks-container"></div>
+                    </div>
+                `;
+                if (mainTitle) mainTitle.style.display = 'none';
+                if (logoContainer) logoContainer.style.display = 'none';
+
+                // Initialize fireworks
+                const fireworksContainer = document.querySelector('.fireworks-container');
+                const fireworks = new Fireworks.default(fireworksContainer, {
+                    autoresize: true,
+                    opacity: 0.5,
+                    acceleration: 1.05,
+                    friction: 0.97,
+                    gravity: 1.5,
+                    particles: 50,
+                    traceLength: 3,
+                    traceSpeed: 10,
+                    explosion: 5,
+                    intensity: 30,
+                    flickering: 50,
+                    lineStyle: 'round',
+                    hue: {
+                        min: 0,
+                        max: 360
+                    },
+                    delay: {
+                        min: 30,
+                        max: 60
+                    },
+                    rocketsPoint: {
+                        min: 50,
+                        max: 50
+                    },
+                    lineWidth: {
+                        explosion: {
+                            min: 1,
+                            max: 3
+                        },
+                        trace: {
+                            min: 1,
+                            max: 2
+                        }
+                    },
+                    brightness: {
+                        min: 50,
+                        max: 80
+                    },
+                    decay: {
+                        min: 0.015,
+                        max: 0.03
+                    },
+                    mouse: {
+                        click: false,
+                        move: false,
+                        max: 1
+                    }
+                });
+                fireworks.start();
+            } else {
+                content.innerHTML = `
+                    <div class="slide-content">
+                        <h2>${slide.title}</h2>
+                        ${slide.subtitle ? `<p class="subtitle">${formatSubtitle(slide.subtitle)}</p>` : ''}
+                        <div id="content">
+                            <ul>
+                                ${slide.content.map(item => `
+                                    <li>
+                                        <i class="${item.icon} icon"></i>
+                                        <span>${item.text}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                if (mainTitle) mainTitle.style.display = 'block';
+                if (logoContainer) logoContainer.style.display = 'flex';
+            }
+
+            if (currentSlideElement) currentSlideElement.textContent = currentSlideIndex + 1;
+            if (slideIndicator) slideIndicator.textContent = `Slide ${currentSlideIndex + 1} of ${totalSlides}`;
+            if (prevBtn) prevBtn.disabled = currentSlideIndex === 0;
+            if (nextBtn) nextBtn.disabled = currentSlideIndex === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            console.log('Changing slide. Direction:', direction);
+            const currentSlide = document.querySelector('.slide');
+            const newIndex = currentSlideIndex + direction;
+            const logo = document.querySelector('.logo-watermark');
+            
+            if (newIndex >= 0 && newIndex < slides.length) {
+                if (currentSlide) currentSlide.classList.add('fade-out');
+                if (logo) {
+                    logo.classList.remove('animate-back');
+                    logo.classList.add('animate-to-center');
+                }
+                
+                setTimeout(() => {
+                    currentSlideIndex = newIndex;
+                    updateSlide();
+                    if (currentSlide) {
+                        currentSlide.classList.remove('fade-out');
+                        currentSlide.classList.add('fade-in');
+                    }
+                    if (logo) {
+                        logo.classList.remove('animate-to-center');
+                        logo.classList.add('animate-back');
+                    }
+
+                    setTimeout(() => {
+                        if (currentSlide) currentSlide.classList.remove('fade-in');
+                    }, 500);
+                }, 500);
+            } else {
+                console.log('Attempted to move out of bounds. Current index:', currentSlideIndex);
+            }
+        }
+
+        function handleKeyDown(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                const nextBtn = document.getElementById('nextBtn');
+                if (nextBtn && !nextBtn.disabled) {
+                    simulateButtonInteraction(nextBtn);
+                }
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                const prevBtn = document.getElementById('prevBtn');
+                if (prevBtn && !prevBtn.disabled) {
+                    simulateButtonInteraction(prevBtn);
+                }
+            }
+        }
+
+        function simulateButtonInteraction(button) {
+            // Simulate hover
+            button.classList.add('simulated-hover');
+            
+            // Simulate click
+            button.click();
+            
+            // Remove hover effect after a short delay
+            setTimeout(() => {
+                button.classList.remove('simulated-hover');
+            }, 300);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM fully loaded');
+
+            document.addEventListener('keydown', handleKeyDown);
+
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            console.log('Previous button:', prevBtn);
+            console.log('Next button:', nextBtn);
+
+            if (prevBtn && nextBtn) {
+                prevBtn.addEventListener('click', () => {
+                    prevBtn.querySelector('i').style.animation = 'none';
+                    setTimeout(() => {
+                        prevBtn.querySelector('i').style.animation = '';
+                    }, 10);
+                    changeSlide(-1);
+                });
+                nextBtn.addEventListener('click', () => {
+                    nextBtn.querySelector('i').style.animation = 'none';
+                    setTimeout(() => {
+                        nextBtn.querySelector('i').style.animation = '';
+                    }, 10);
+                    changeSlide(1);
+                });
+            } else {
+                console.error('Navigation buttons not found');
+            }
+
+            // Initial slide update
+            updateSlide();
+        });
+    </script>
+</body>
+</html>
